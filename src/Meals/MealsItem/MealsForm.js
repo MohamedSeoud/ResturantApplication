@@ -14,13 +14,16 @@ const MealForm =(props) =>{
         step: '1',
         defaultValue: '1',
     }
+
+
     const onSubmitHandler = (event)=>{
-        const enteredAmount = +amountRef.current.value;
+        event.preventDefault();
+        const enteredAmount = +(amountRef.current.value);
         if(enteredAmount===0||enteredAmount>5||enteredAmount<1){
             setAmountValue(false);
             return;
         }
-        props.onAddtocart(enteredAmount);
+        props.onAddToCart(enteredAmount);
     } 
 
 
@@ -29,10 +32,16 @@ const MealForm =(props) =>{
         <Fragment>
             <form className={Classes.form} onSubmit={onSubmitHandler}>
                 <Input
-                input={inputFormItems}
+                input={{
+                id: 'amount_' + props.id,
+                type: 'number',
+                min: '1',
+                max: '5',
+                step: '1',
+                defaultValue: '1',}}
                 ref={amountRef}
                 label={"Amount"}/>
-                <button> +Add </button>
+                <button > +Add </button>
                 {!amountValue && <p>Please enter a valid amount (1-5).</p>}
             </form>
         </Fragment>

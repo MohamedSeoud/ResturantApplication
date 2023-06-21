@@ -3,6 +3,8 @@ import { Fragment, useState } from 'react';
 import Header from './Layout/Header';
 import Meals from './Meals/Meals';
 import Cart from './Cart/Cart';
+import CartContext from './State/CartContextProvider';
+import CartContextProvider from './State/CartContextProvider';
 
 function App() {
 
@@ -18,14 +20,14 @@ function App() {
 
 
   return (
-    <Fragment>
+    <CartContextProvider>
       {cartIsShwown && <Cart closeClicked={onCloseHandler}/>}
       <Header shownClicked={onShwownHandler}/>
       <main>
       <Meals/>
       </main>
-    </Fragment>
-  );
+      </CartContextProvider>
+      );
 }
 
 export default App;

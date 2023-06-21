@@ -1,10 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import Classes from './CartButton.module.css';
 import CartIcon from "../Cart/CartIcon";
+import CartContext from "../State/CartContext";
 
 const CartButton = (props)=>{
+    const CartCtx = useContext(CartContext);
 
-    const orderNumber = 3;
+    const orderNumber = CartCtx.items.reduce((number,item)=>{
+        return number+item.amount;
+    },0) ;
+    
 
     return(
         <Fragment>

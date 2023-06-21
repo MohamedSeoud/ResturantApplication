@@ -1,10 +1,11 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import Classes from './Cart.module.css';
-import Card from "../UI/Card";
 import Modal from "./Modal";
+import CartContext from "../State/CartContext";
 
 const Cart = (props)=>{
 
+    const CartCtx = useContext(CartContext); 
     // const CartItems = props.items.map(((item)=>{
     //     return(
     //         <li>
@@ -21,7 +22,7 @@ const Cart = (props)=>{
             CartItem
             <div className={Classes.total}>
                 <span>Amount</span>
-                <span>{}</span>
+                <span>{CartCtx.totalAmount}</span>
             </div>
             </div>
             <div className={Classes.actions}>
