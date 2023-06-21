@@ -1,33 +1,30 @@
-import './App.css';
-import { Fragment, useState } from 'react';
-import Header from './Layout/Header';
-import Meals from './Meals/Meals';
-import Cart from './Cart/Cart';
-import CartContext from './State/CartContextProvider';
-import CartContextProvider from './State/CartContextProvider';
+import { useState } from 'react';
+
+import Header from './components/Layout/Header';
+import Meals from './components/Meals/Meals';
+import Cart from './components/Cart/Cart';
+import CartProvider from './store/CartProvider';
 
 function App() {
+  const [cartIsShown, setCartIsShown] = useState(false);
 
-  const [cartIsShwown,setCartIsShwown] = useState(false);
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  };
 
-  const onShwownHandler = ()=>{
-    setCartIsShwown(true);
-  }
-
-  const onCloseHandler = ()=>{
-    setCartIsShwown(false);
-  }
-
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  };
 
   return (
-    <CartContextProvider>
-      {cartIsShwown && <Cart closeClicked={onCloseHandler}/>}
-      <Header shownClicked={onShwownHandler}/>
+    <CartProvider>
+      {cartIsShown && <Cart onClose={hideCartHandler} />}
+      <Header onShowCart={showCartHandler} />
       <main>
-      <Meals/>
+        <Meals />
       </main>
-      </CartContextProvider>
-      );
+    </CartProvider>
+  );
 }
 
 export default App;
